@@ -1,13 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-//import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import HomePage from "./pages/Home";
 
 export default function Home() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<>Home</>}></Route>
-          <Route path="*" element={<>404</>}></Route>
+          <Route path="/" element={<HomePage />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
     </>
