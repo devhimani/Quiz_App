@@ -11,23 +11,46 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { quizContext } from "@/store/quizContext";
+import { useContext, useState } from "react";
 
 export function AddQuiz() {
+  const [isOpen, setIsOpen] = useState(false);
+  const { quizzes, setQuizzes } = useContext(quizContext);
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [duration, setDuration] = useState(0);
   const [marks, setMarks] = useState(0);
 
-  const handleSubmit = () => [console.log({ name, desc, duration, marks })];
+  const handleSubmit = () => {
+    //console.log({ name, desc, duration, marks });
+    const newQuiz = { id: Date.now(), name, desc, duration, marks };
 
-  // set data in context
-  // set data in firebase
-  // clear form
-  //close dialog
+    // set data in context
+    setQuizzes([...quizzes, newQuiz]);
+
+    // set data in firebase
+
+    // clear form
+    // setName("");
+    // setDesc("");
+    // setDuration(0);
+    // setMarks(0);
+    handleClearAll();
+
+    //close dialog
+    setIsOpen(false);
+  };
+
+  const handleClearAll = () => {
+    setName("");
+    setDesc("");
+    setDuration(0);
+    setMarks(0);
+  };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={() => setIsOpen(!isOpen)}>
       <DialogTrigger asChild>
         <Button>Add Quiz</Button>
       </DialogTrigger>
@@ -82,7 +105,10 @@ export function AddQuiz() {
             </div>
           </div>
         </div>
-        <DialogFooter>
+        <DialogFooter className="flex flex-col justify-between">
+          <Button variant={"outline"} onClick={handleClearAll}>
+            Clear All
+          </Button>
           <Button
             type="submit"
             onClick={handleSubmit}
