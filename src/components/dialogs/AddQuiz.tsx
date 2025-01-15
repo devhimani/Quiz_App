@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { addQuizDB } from "@/firebase";
 import { quizContext } from "@/store/quizContext";
 import { useContext, useState } from "react";
 
@@ -30,6 +31,7 @@ export function AddQuiz() {
     setQuizzes([...quizzes, newQuiz]);
 
     // set data in firebase
+    addQuizDB(newQuiz);
 
     // clear form
     // setName("");
