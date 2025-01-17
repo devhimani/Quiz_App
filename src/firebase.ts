@@ -23,3 +23,7 @@ export const addQuizDB = (quiz) => {
 export const getDataDB = () => {
   return get(ref(db, "quizzes"));
 };
+
+export const getQuizDataDB = (id) => {
+  return get(ref(db, "quizzes/" + id));
+};
