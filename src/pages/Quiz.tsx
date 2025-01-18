@@ -1,3 +1,4 @@
+import { AddQuestion } from "@/components/dialogs/AddQuestiom";
 import { getQuizDataDB } from "@/firebase";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -23,9 +24,7 @@ const Quiz = () => {
 
   return (
     <div>
-      Quiz Page
-      <p>Quiz Id: {quiz.id} </p>
-      <p>Quiz Name: {quiz.name} </p>
+      <AddQuestion />
     </div>
   );
 };
